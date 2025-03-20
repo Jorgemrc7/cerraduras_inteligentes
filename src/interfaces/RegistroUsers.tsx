@@ -15,8 +15,10 @@ import { db } from "@/src/services/firebaseConfig";
 interface User {
   id: string;
   nombre: string;
-  apellido: string;
+  //apellido: string;
   matricula: string;
+  huella1: string;
+  huella2: string;
 }
 
 const RegistroUsers: React.FC = () => {
@@ -34,18 +36,7 @@ const RegistroUsers: React.FC = () => {
       setUsers(usersData);
     };
     fetchUsers();
-  }, []);
-
-  const fetchUsers = async () => {
-    const querySnapshot = await getDocs(collection(db, "users"));
-    const users = querySnapshot.docs.map((doc) => ({
-      id: doc.id,
-      ...doc.data(),
-    }));
-    console.log(users);
-  };
-
-  fetchUsers();
+  }, []); // Mantener el useEffect limpio y sin llamadas repetidas
 
   const handleOpenModal = () => setIsModalOpen(true);
   const handleCloseModal = () => {
@@ -56,14 +47,14 @@ const RegistroUsers: React.FC = () => {
   const handleSaveUser = async (newUser: Omit<User, "id">) => {
     if (editingUser) {
       await updateDoc(doc(db, "users", editingUser.id), newUser);
-      setUsers(
-        users.map((user) =>
+      setUsers((prevUsers) =>
+        prevUsers.map((user) =>
           user.id === editingUser.id ? { ...newUser, id: editingUser.id } : user
         )
       );
     } else {
       const docRef = await addDoc(collection(db, "users"), newUser);
-      setUsers([...users, { ...newUser, id: docRef.id }]);
+      setUsers((prevUsers) => [...prevUsers, { ...newUser, id: docRef.id }]);
     }
     handleCloseModal();
   };
@@ -75,7 +66,7 @@ const RegistroUsers: React.FC = () => {
 
   const handleDeleteUser = async (id: string) => {
     await deleteDoc(doc(db, "users", id));
-    setUsers(users.filter((user) => user.id !== id));
+    setUsers((prevUsers) => prevUsers.filter((user) => user.id !== id));
   };
 
   return (
@@ -95,8 +86,11 @@ const RegistroUsers: React.FC = () => {
           <thead>
             <tr>
               <th>Nombre</th>
-              <th>Apellido</th>
+              {/*<th>Apellido</th> */}
+
               <th>Matrícula</th>
+              <th>Huella 1</th>
+              <th>Huella 2</th>
               <th>Acciones</th>
             </tr>
           </thead>
@@ -105,8 +99,10 @@ const RegistroUsers: React.FC = () => {
               users.map((user) => (
                 <tr key={user.id}>
                   <td>{user.nombre}</td>
-                  <td>{user.apellido}</td>
+                  {/*<td>{user.apellido}</td> */}
                   <td>{user.matricula}</td>
+                  <td>{user.huella1}</td>
+                  <td>{user.huella2}</td>
                   <td>
                     <button
                       onClick={() => handleEditUser(user)}
