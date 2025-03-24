@@ -104,7 +104,7 @@ const NewUserModal: React.FC<ModalProps> = ({
           onChange={handleChange}
           className={styles.input}
         />
-        <input type="checkbox" name="huella1" value={formData.huella1} />
+
         <button onClick={handleSave} className={styles.button}>
           Guardar
         </button>

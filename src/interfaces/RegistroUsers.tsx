@@ -11,6 +11,7 @@ import {
   updateDoc,
 } from "firebase/firestore";
 import { db } from "@/src/services/firebaseConfig";
+import BotonHuellas from "@/src/components/BotonHuellas"; // Importa el componente
 
 interface User {
   id: string;
@@ -87,7 +88,6 @@ const RegistroUsers: React.FC = () => {
             <tr>
               <th>Nombre</th>
               {/*<th>Apellido</th> */}
-
               <th>Matrícula</th>
               <th>Huella 1</th>
               <th>Huella 2</th>
@@ -101,8 +101,14 @@ const RegistroUsers: React.FC = () => {
                   <td>{user.nombre}</td>
                   {/*<td>{user.apellido}</td> */}
                   <td>{user.matricula}</td>
-                  <td>{user.huella1}</td>
-                  <td>{user.huella2}</td>
+                  <td>
+                    <BotonHuellas userID={user.id} huellaCampo="huella1" />
+                    <span>✔ Registrado</span>
+                  </td>
+                  <td>
+                    <BotonHuellas userID={user.id} huellaCampo="huella2" />
+                    <span>✔ Registrado</span>
+                  </td>
                   <td>
                     <button
                       onClick={() => handleEditUser(user)}
@@ -121,7 +127,7 @@ const RegistroUsers: React.FC = () => {
               ))
             ) : (
               <tr>
-                <td colSpan={4} className={styles.noDatos}>
+                <td colSpan={5} className={styles.noDatos}>
                   No hay usuarios registrados
                 </td>
               </tr>
