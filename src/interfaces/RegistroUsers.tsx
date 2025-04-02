@@ -16,7 +16,6 @@ import BotonHuellas from "@/src/components/BotonHuellas"; // Importa el componen
 interface User {
   id: string;
   nombre: string;
-  //apellido: string;
   matricula: string;
   huella1: string;
   huella2: string;
@@ -85,13 +84,13 @@ const RegistroUsers: React.FC = () => {
       <div className={styles.tableContainer}>
         <table className={styles.table}>
           <thead>
-            <tr>
+            <tr className={styles.tableTitulos}>
               <th>Nombre</th>
-              {/*<th>Apellido</th> */}
               <th>Matrícula</th>
               <th>Huella 1</th>
               <th>Huella 2</th>
               <th>Acciones</th>
+              <th>Permisos</th>
             </tr>
           </thead>
           <tbody>
@@ -99,15 +98,12 @@ const RegistroUsers: React.FC = () => {
               users.map((user) => (
                 <tr key={user.id}>
                   <td>{user.nombre}</td>
-                  {/*<td>{user.apellido}</td> */}
                   <td>{user.matricula}</td>
                   <td>
                     <BotonHuellas userID={user.id} huellaCampo="huella1" />
-                    <span>✔ Registrado</span>
                   </td>
                   <td>
                     <BotonHuellas userID={user.id} huellaCampo="huella2" />
-                    <span>✔ Registrado</span>
                   </td>
                   <td>
                     <button
@@ -122,6 +118,9 @@ const RegistroUsers: React.FC = () => {
                     >
                       Eliminar
                     </button>
+                  </td>
+                  <td>
+                    <button className={styles.permisosButton}>Permisos</button>
                   </td>
                 </tr>
               ))
