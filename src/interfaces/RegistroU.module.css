@@ -42,6 +42,9 @@
     border-radius: 5px;
     cursor: pointer;
   }
+  .deleteButton:hover{
+    background-color: #d61d2f;
+  }
   .editButton {
     padding: 5px 10px;
     background-color: #079c14;
@@ -49,6 +52,20 @@
     border: none;
     border-radius: 5px;
     cursor: pointer;
+  }
+  .editButton:hover{
+    background-color: #078011;
+  }
+  .permisosButton{
+    padding: 5px 10px;
+    background-color: #1136da;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  .permisosButton:hover{
+    background-color: #0e2fc0;
   }
   /* Tabla */
   .table {
@@ -60,6 +77,7 @@
     top: 100px;
     left: 120px;
   }
+
   .td {
     padding: 10px;
     border: 1px solid black;
@@ -70,7 +88,17 @@
     border: 1px solid black;
   }
   
+  .table tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  
+  .table tbody tr:hover {
+    background-color: #e1ecf9;
+  }
 
+.tableTitulos{
+  background-color: #bebebe;
+}
 .newButton {
   background-color: #007bff;
   color: white;
@@ -89,6 +117,17 @@
   background-color: #0056b3;
 }
 
+.registroHuellas{
+  padding: 5px 10px;
+  background-color: #1136da;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.registroHuellas:hover{
+  background-color: #0e2fc0;
+}
 /* Modal */
 .modalOverlay {
   position: fixed;
